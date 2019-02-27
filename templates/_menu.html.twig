@@ -1,0 +1,60 @@
+<header>
+    <nav class="navbar navbar-expand-md bg-light navbar-light">
+        <div class="container">
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('accueil') }}">Accueil</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mobs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('runage') }}">Runage</a>
+                            <a class="dropdown-item" href="{{ path('collection') }}">Collection</a>
+                            <a class="dropdown-item" href="{{ path('utilite') }}">Utilité</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Guilde
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('gvg') }}">GVG</a>
+                            <a class="dropdown-item" href="{{ path('historique') }}">Historique</a>
+                            <a class="dropdown-item" href="{{ path('aide_teams') }}">Aide Teams</a>
+                            <a class="dropdown-item" href="{{ path('stats_defenses') }}">Stats Défenses</a>
+                            <a class="dropdown-item" href="{{ path('recensement') }}">Recensement</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('faq') }}">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('cgu') }}">CGU</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('collection') }}"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+                            <a class="dropdown-item" href="{{ path('collection') }}"><i class="fas fa-user-edit"></i> Profil</a>
+                            <a class="dropdown-item" href="{{ path('collection') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
