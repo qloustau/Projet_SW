@@ -19,6 +19,11 @@ class Mob
     private $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $IDinGame;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $Name;
@@ -42,41 +47,6 @@ class Mob
      * @ORM\Column(type="integer")
      */
     private $Grade;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $HealthPoints;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Attack;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Defense;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Speed;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $CriticalRate;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $CriticalDamage;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Resistance;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Skill", inversedBy="mobs")
@@ -105,6 +75,22 @@ class Mob
      */
     private $account;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Devilmon;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $Awake = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Stats", inversedBy="mobs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Stats;
+
     public function __construct()
     {
         $this->Attribute = new ArrayCollection();
@@ -114,6 +100,18 @@ class Mob
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getIDinGame(): ?int
+    {
+        return $this->IDinGame;
+    }
+
+    public function setIDinGame(int $IDinGame): self
+    {
+        $this->IDinGame = $IDinGame;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -195,90 +193,6 @@ class Mob
         return $this;
     }
 
-    public function getHealthPoints(): ?int
-    {
-        return $this->HealthPoints;
-    }
-
-    public function setHealthPoints(int $HealthPoints): self
-    {
-        $this->HealthPoints = $HealthPoints;
-
-        return $this;
-    }
-
-    public function getAttack(): ?int
-    {
-        return $this->Attack;
-    }
-
-    public function setAttack(int $Attack): self
-    {
-        $this->Attack = $Attack;
-
-        return $this;
-    }
-
-    public function getDefense(): ?int
-    {
-        return $this->Defense;
-    }
-
-    public function setDefense(int $Defense): self
-    {
-        $this->Defense = $Defense;
-
-        return $this;
-    }
-
-    public function getSpeed(): ?int
-    {
-        return $this->Speed;
-    }
-
-    public function setSpeed(int $Speed): self
-    {
-        $this->Speed = $Speed;
-
-        return $this;
-    }
-
-    public function getCriticalRate(): ?int
-    {
-        return $this->CriticalRate;
-    }
-
-    public function setCriticalRate(int $CriticalRate): self
-    {
-        $this->CriticalRate = $CriticalRate;
-
-        return $this;
-    }
-
-    public function getCriticalDamage(): ?int
-    {
-        return $this->CriticalDamage;
-    }
-
-    public function setCriticalDamage(int $CriticalDamage): self
-    {
-        $this->CriticalDamage = $CriticalDamage;
-
-        return $this;
-    }
-
-    public function getResistance(): ?int
-    {
-        return $this->Resistance;
-    }
-
-    public function setResistance(int $Resistance): self
-    {
-        $this->Resistance = $Resistance;
-
-        return $this;
-    }
-
     public function getSkills(): ?Skill
     {
         return $this->Skills;
@@ -351,6 +265,42 @@ class Mob
     public function setAccount(?Account $account): self
     {
         $this->account = $account;
+
+        return $this;
+    }
+
+    public function getDevilmon(): ?int
+    {
+        return $this->Devilmon;
+    }
+
+    public function setDevilmon(int $Devilmon): self
+    {
+        $this->Devilmon = $Devilmon;
+
+        return $this;
+    }
+
+    public function getAwake(): ?array
+    {
+        return $this->Awake;
+    }
+
+    public function setAwake(?array $Awake): self
+    {
+        $this->Awake = $Awake;
+
+        return $this;
+    }
+
+    public function getStats(): ?Stats
+    {
+        return $this->Stats;
+    }
+
+    public function setStats(?Stats $Stats): self
+    {
+        $this->Stats = $Stats;
 
         return $this;
     }

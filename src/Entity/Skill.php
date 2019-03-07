@@ -58,6 +58,11 @@ class Skill
      */
     private $mobs;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Devilmon;
+
     public function __construct()
     {
         $this->mobs = new ArrayCollection();
@@ -209,6 +214,18 @@ class Skill
                 $mob->setSkills(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDevilmon(): ?int
+    {
+        return $this->Devilmon;
+    }
+
+    public function setDevilmon(int $Devilmon): self
+    {
+        $this->Devilmon = $Devilmon;
 
         return $this;
     }
