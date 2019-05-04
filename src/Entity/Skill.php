@@ -49,25 +49,49 @@ class Skill
     private $State;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Passif;
+
+    /**
      * @ORM\Column(type="array", nullable=true)
      */
     private $LeaderSkill = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Mob", mappedBy="Skills")
+     * @ORM\ManyToMany(targetEntity="OtherEffect", inversedBy="othereffectskills")
+     */
+    private $OtherEffect;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Mob", inversedBy="Skills")
      */
     private $mobs;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
-    private $Devilmon;
+    private $SkillAwake;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Image;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Element;
 
     public function __construct()
     {
-        $this->mobs = new ArrayCollection();
         $this->Buffs = new ArrayCollection();
         $this->Debuffs = new ArrayCollection();
+        $this->OtherEffect = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->Name;
     }
 
     public function getId(): ?int
@@ -175,6 +199,18 @@ class Skill
         return $this;
     }
 
+    public function getPassif(): ?bool
+    {
+        return $this->Passif;
+    }
+
+    public function setPassif(bool $Passif): self
+    {
+        $this->Passif = $Passif;
+
+        return $this;
+    }
+
     public function getLeaderSkill(): ?array
     {
         return $this->LeaderSkill;
@@ -188,44 +224,75 @@ class Skill
     }
 
     /**
-     * @return Collection|Mob[]
+     * @return Collection|OtherEffect[]
      */
-    public function getMobs(): Collection
+    public function getOtherEffect(): Collection
+    {
+        return $this->OtherEffect;
+    }
+
+    public function addOtherEffect(OtherEffect $othereffect): self
+    {
+        if (!$this->OtherEffect->contains($othereffect)) {
+            $this->OtherEffect[] = $othereffect;
+        }
+
+        return $this;
+    }
+
+    public function removeOtherEffect(OtherEffect $othereffect): self
+    {
+        if ($this->OtherEffect->contains($othereffect)) {
+            $this->OtherEffect->removeElement($othereffect);
+        }
+
+        return $this;
+    }
+
+    public function getMobs(): ?Mob
     {
         return $this->mobs;
     }
 
-    public function addMob(Mob $mob): self
+    public function setMobs(?Mob $mobs): self
     {
-        if (!$this->mobs->contains($mob)) {
-            $this->mobs[] = $mob;
-            $mob->setSkills($this);
-        }
+        $this->mobs = $mobs;
 
         return $this;
     }
 
-    public function removeMob(Mob $mob): self
+    public function getSkillAwake(): ?bool
     {
-        if ($this->mobs->contains($mob)) {
-            $this->mobs->removeElement($mob);
-            // set the owning side to null (unless already changed)
-            if ($mob->getSkills() === $this) {
-                $mob->setSkills(null);
-            }
-        }
+        return $this->SkillAwake;
+    }
+
+    public function setSkillAwake(bool $SkillAwake): self
+    {
+        $this->SkillAwake = $SkillAwake;
 
         return $this;
     }
 
-    public function getDevilmon(): ?int
+    public function getImage(): ?string
     {
-        return $this->Devilmon;
+        return $this->Image;
     }
 
-    public function setDevilmon(int $Devilmon): self
+    public function setImage(?string $Image): self
     {
-        $this->Devilmon = $Devilmon;
+        $this->Image = $Image;
+
+        return $this;
+    }
+
+    public function getElement(): ?string
+    {
+        return $this->Element;
+    }
+
+    public function setElement(string $Element): self
+    {
+        $this->Element = $Element;
 
         return $this;
     }

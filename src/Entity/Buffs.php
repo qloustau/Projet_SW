@@ -29,7 +29,7 @@ class Buffs
     private $Description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $Value;
 
@@ -39,13 +39,17 @@ class Buffs
     private $buffskills;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $StatEffect;
 
     public function __construct()
     {
         $this->buffskills = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->Name;
     }
 
     public function getId(): ?int
@@ -97,7 +101,7 @@ class Buffs
         return $this->buffskills;
     }
 
-    public function addBuffskill(Skill $buffskill): self
+    public function addBuffskills(Skill $buffskill): self
     {
         if (!$this->buffskills->contains($buffskill)) {
             $this->buffskills[] = $buffskill;
@@ -107,7 +111,7 @@ class Buffs
         return $this;
     }
 
-    public function removeBuffskill(Skill $buffskill): self
+    public function removeBuffskills(Skill $buffskill): self
     {
         if ($this->buffskills->contains($buffskill)) {
             $this->buffskills->removeElement($buffskill);

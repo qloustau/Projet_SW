@@ -1,0 +1,67 @@
+easy_admin:
+    entities:
+        Buffs:
+            class: App\Entity\Buffs
+        Debuffs:
+            class: App\Entity\Debuffs
+        OtherEffect:
+            class: App\Entity\OtherEffect
+        Skill:
+            class: App\Entity\Skill
+            list:
+              fields:
+                - "id"
+                - "Name"
+                - "Element"
+                - "SkillUp"
+                - "Buffs"
+                - "Debuffs"
+                - "OtherEffect"
+                - "Passif"
+                - "SkillAwake"
+                - "State"
+                - "LeaderSkill"
+                - "mobs"
+                - "Image"
+            form:
+              fields:
+                - "Name"
+                - "Description"
+                - "SkillUp"
+                - "Passif"
+                - "SkillAwake"
+                - "Element"
+                - "Buffs"
+                - "Debuffs"
+                - "OtherEffect"
+                - "State"
+                - "LeaderSkill"
+                - "mobs"
+                - { property: "Image", type: "file"}
+        Mob:
+          class: App\Entity\Mob
+          form:
+            fields:
+              - "IDinGame"
+              - "Name"
+              - "GradeNat"
+              - "Family"
+              - "Class"
+              - "Attribute"
+              - "Skills"
+              - "Runes"
+              - "Account"
+              - "Stats"
+              - "Devilmon"
+              - "Awake"
+        Attribute:
+          class: App\Entity\Attribute
+        Stats:
+          class: App\Entity\Stats
+    list:
+      actions:
+        - { name: 'show', icon: 'search', label: '', title: 'Search' }
+        - { name: 'edit', icon: 'pencil', label: '', title: 'Edit' }
+        - { name: 'delete', icon: 'times', label: '', title: 'Delete' }
+
+

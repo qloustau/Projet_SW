@@ -49,6 +49,10 @@ class Guild
         $this->accounts = new ArrayCollection();
     }
 
+    public function __toString() {
+        return $this->Name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -29,23 +29,27 @@ class Debuffs
     private $Description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $Value;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $StatEffect;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Skill", mappedBy="$ebuffs")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Skill", mappedBy="Debuffs")
      */
     private $debuffskills;
 
     public function __construct()
     {
         $this->debuffskills = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->Name;
     }
 
     public function getId(): ?int
@@ -109,7 +113,7 @@ class Debuffs
         return $this->debuffskills;
     }
 
-    public function addDebuffskill(Skill $debuffskill): self
+    public function addDebuffskills(Skill $debuffskill): self
     {
         if (!$this->debuffskills->contains($debuffskill)) {
             $this->debuffskills[] = $debuffskill;
@@ -119,7 +123,7 @@ class Debuffs
         return $this;
     }
 
-    public function removeDebuffskill(Skill $debuffskill): self
+    public function removeDebuffskills(Skill $debuffskill): self
     {
         if ($this->debuffskills->contains($debuffskill)) {
             $this->debuffskills->removeElement($debuffskill);

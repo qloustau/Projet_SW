@@ -26,7 +26,7 @@ class Attribute
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Attribute", inversedBy="Advantage")
      */
-    private $advattribute;
+    private $disadvattribute;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Attribute", mappedBy="advattribute")
@@ -34,24 +34,29 @@ class Attribute
     private $Advantage;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Attribute", inversedBy="disadvattribute")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Attribute", inversedBy="Disadvantage")
+     */
+    private $advattribute;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Attribute", mappedBy="disadvattribute")
      */
     private $Disadvantage;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Attribute", mappedBy="Disadvantage")
-     */
-    private $disadvattribute;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Mob", inversedBy="Attribute")
+     * @ORM\OneToMany(targetEntity="App\Entity\Mob", mappedBy="Attribute")
      */
     private $mob;
 
     public function __construct()
     {
         $this->Advantage = new ArrayCollection();
-        $this->disadvattribute = new ArrayCollection();
+        $this->Disadvantage = new ArrayCollection();
+        $this->mob = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->Name;
     }
 
     public function getId(): ?int
@@ -95,7 +100,7 @@ class Attribute
     {
         if (!$this->Advantage->contains($advantage)) {
             $this->Advantage[] = $advantage;
-            $advantage->setAdvattribute($this);
+            $advantage->setDisadvattribute($this);
         }
 
         return $this;
@@ -106,22 +111,22 @@ class Attribute
         if ($this->Advantage->contains($advantage)) {
             $this->Advantage->removeElement($advantage);
             // set the owning side to null (unless already changed)
-            if ($advantage->getAdvattribute() === $this) {
-                $advantage->setAdvattribute(null);
+            if ($advantage->getDisadvattribute() === $this) {
+                $advantage->setDisadvattribute(null);
             }
         }
 
         return $this;
     }
 
-    public function getDisadvantage(): ?self
+    public function getDisadvattribute(): ?self
     {
-        return $this->Disadvantage;
+        return $this->disadvattribute;
     }
 
-    public function setDisadvantage(?self $Disadvantage): self
+    public function setDisadvattribute(?self $disadvattribute): self
     {
-        $this->Disadvantage = $Disadvantage;
+        $this->disadvattribute = $disadvattribute;
 
         return $this;
     }
@@ -129,42 +134,61 @@ class Attribute
     /**
      * @return Collection|self[]
      */
-    public function getDisadvattribute(): Collection
+    public function getDisadvantage(): Collection
     {
-        return $this->disadvattribute;
+        return $this->Disadvantage;
     }
 
-    public function addDisadvattribute(self $disadvattribute): self
+    public function addDisadvantage(self $Disadvantage): self
     {
-        if (!$this->disadvattribute->contains($disadvattribute)) {
-            $this->disadvattribute[] = $disadvattribute;
-            $disadvattribute->setDisadvantage($this);
+        if (!$this->Disadvantage->contains($Disadvantage)) {
+            $this->Disadvantage[] = $Disadvantage;
+            $Disadvantage->setAdvattribute($this);
         }
 
         return $this;
     }
 
-    public function removeDisadvattribute(self $disadvattribute): self
+    public function removeDisadvantage(self $Disadvantage): self
     {
-        if ($this->disadvattribute->contains($disadvattribute)) {
-            $this->disadvattribute->removeElement($disadvattribute);
+        if ($this->Disadvantage->contains($Disadvantage)) {
+            $this->Disadvantage->removeElement($Disadvantage);
             // set the owning side to null (unless already changed)
-            if ($disadvattribute->getDisadvantage() === $this) {
-                $disadvattribute->setDisadvantage(null);
+            if ($Disadvantage->getAdvattribute() === $this) {
+                $Disadvantage->setAdvattribute(null);
             }
         }
 
         return $this;
     }
 
-    public function getMob(): ?Mob
+    /**
+     * @return Collection|Mob[]
+     */
+    public function getMob(): Collection
     {
         return $this->mob;
     }
 
-    public function setMob(?Mob $mob): self
+    public function addMob(Mob $mob): self
     {
-        $this->mob = $mob;
+        if (!$this->mob->contains($mob)) {
+            $this->mob[] = $mob;
+            $mob->setAttribute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMob(Mob $mob): self
+    {
+        if ($this->mob->contains($mob)) {
+            $this->mob->removeElement($mob);
+            // set the owning side to null (unless already changed)
+            if ($mob->getAttribute() === $this) {
+                $mob->setAttribute(null);
+            }
+        }
 
         return $this;
     }

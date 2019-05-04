@@ -21,6 +21,11 @@ class Rune
     /**
      * @ORM\Column(type="integer")
      */
+    private $IDinGame;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $Slot;
 
     /**
@@ -94,9 +99,25 @@ class Rune
         $this->mobs = new ArrayCollection();
     }
 
+    public function __toString() {
+        return (string)$this->IDinGame;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getIDinGame(): ?int
+    {
+        return $this->IDinGame;
+    }
+
+    public function setIDinGame(int $IDinGame): self
+    {
+        $this->IDinGame = $IDinGame;
+
+        return $this;
     }
 
     public function getSlot(): ?int

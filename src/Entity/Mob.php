@@ -34,7 +34,7 @@ class Mob
     private $Family;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Attribute", mappedBy="mob")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Attribute", inversedBy="mob")
      */
     private $Attribute;
 
@@ -46,10 +46,10 @@ class Mob
     /**
      * @ORM\Column(type="integer")
      */
-    private $Grade;
+    private $GradeNat;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Skill", inversedBy="mobs")
+     * @ORM\OneToMany(targetEntity="App\Entity\Skill", mappedBy="mobs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Skills;
@@ -60,18 +60,13 @@ class Mob
     private $Runes;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $Level;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Team", mappedBy="Mobs")
      */
     private $teams;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Account", inversedBy="Mobs")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $account;
 
@@ -86,15 +81,19 @@ class Mob
     private $Awake = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Stats", inversedBy="mobs")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Stats", mappedBy="mobs")
      */
     private $Stats;
 
     public function __construct()
     {
-        $this->Attribute = new ArrayCollection();
+        $this->Skills = new ArrayCollection();
         $this->teams = new ArrayCollection();
+        $this->Stats = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->Name;
     }
 
     public function getId(): ?int
@@ -138,33 +137,14 @@ class Mob
         return $this;
     }
 
-    /**
-     * @return Collection|Attribute[]
-     */
-    public function getAttribute(): Collection
+    public function getAttribute(): ?Attribute
     {
         return $this->Attribute;
     }
 
-    public function addAttribute(Attribute $attribute): self
+    public function setAttribute(?Attribute $attribute): self
     {
-        if (!$this->Attribute->contains($attribute)) {
-            $this->Attribute[] = $attribute;
-            $attribute->setMob($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAttribute(Attribute $attribute): self
-    {
-        if ($this->Attribute->contains($attribute)) {
-            $this->Attribute->removeElement($attribute);
-            // set the owning side to null (unless already changed)
-            if ($attribute->getMob() === $this) {
-                $attribute->setMob(null);
-            }
-        }
+        $this->Attribute = $attribute;
 
         return $this;
     }
@@ -181,26 +161,45 @@ class Mob
         return $this;
     }
 
-    public function getGrade(): ?int
+    public function getGradeNat(): ?int
     {
-        return $this->Grade;
+        return $this->GradeNat;
     }
 
-    public function setGrade(int $Grade): self
+    public function setGradeNat(int $GradeNat): self
     {
-        $this->Grade = $Grade;
+        $this->GradeNat = $GradeNat;
 
         return $this;
     }
 
-    public function getSkills(): ?Skill
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSkills(): Collection
     {
         return $this->Skills;
     }
 
-    public function setSkills(?Skill $Skills): self
+    public function addSkill(Skill $Skills): self
     {
-        $this->Skills = $Skills;
+        if (!$this->Skills->contains($Skills)) {
+            $this->Skills[] = $Skills;
+            $Skills->setMobs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $Skills): self
+    {
+        if ($this->Skills->contains($Skills)) {
+            $this->Skills->removeElement($Skills);
+            // set the owning side to null (unless already changed)
+            if ($Skills->getMobs() === $this) {
+                $Skills->setMobs(null);
+            }
+        }
 
         return $this;
     }
@@ -213,18 +212,6 @@ class Mob
     public function setRunes(?Rune $Runes): self
     {
         $this->Runes = $Runes;
-
-        return $this;
-    }
-
-    public function getLevel(): ?int
-    {
-        return $this->Level;
-    }
-
-    public function setLevel(int $Level): self
-    {
-        $this->Level = $Level;
 
         return $this;
     }
@@ -293,14 +280,33 @@ class Mob
         return $this;
     }
 
-    public function getStats(): ?Stats
+    /**
+     * @return Collection|Stats[]
+     */
+    public function getStats(): Collection
     {
         return $this->Stats;
     }
 
-    public function setStats(?Stats $Stats): self
+    public function addStats(Stats $Stats): self
     {
-        $this->Stats = $Stats;
+        if (!$this->Stats->contains($Stats)) {
+            $this->Stats[] = $Stats;
+            $Stats->setMobs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStats(Stats $Stats): self
+    {
+        if ($this->Stats->contains($Stats)) {
+            $this->Stats->removeElement($Stats);
+            // set the owning side to null (unless already changed)
+            if ($Stats->getMobs() === $this) {
+                $Stats->setMobs(null);
+            }
+        }
 
         return $this;
     }
