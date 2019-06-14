@@ -4,4 +4,114 @@
 
 {% block body %}
 
+    <!-- Slider -->
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+
+
+
+    <div class="container mobfeu">
+        <div class="row">
+            {% if mobs['Feu'] is defined and mobs['Feu'] is not empty %}
+            <div class="col-12">
+                <h2>Mob Feu</h2>
+            </div>
+                {% for mob in mobs['Feu'] %}
+                    <div class="col-1">
+                        <div class="container">
+                            {% if vich_uploader_asset(mob, 'imageFile') is null %}
+                                <img class="card-img-top" src="/images/monstres/monster.png" alt>
+                            {% else %}
+                                <img class="card-img-top" src="{{ vich_uploader_asset(mob, 'imageFile') }}" alt="Card image cap">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="container mobfeu">
+        <div class="row">
+            {% if mobs['Eau'] is defined and mobs['Eau'] is not empty %}
+                <div class="col-12">
+                    <h2>Mob Eau</h2>
+                </div>
+                {% for mob in mobs['Eau'] %}
+                    <div class="col-1">
+                        <div class="container">
+                            {% if vich_uploader_asset(mob, 'imageFile') is null %}
+                                <img class="card-img-top" src="/images/monstres/monster.png" alt>
+                            {% else %}
+                                <img class="card-img-top" src="{{ vich_uploader_asset(mob, 'imageFile') }}" alt="Card image cap">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="container mobfeu">
+        <div class="row">
+            {% if mobs['Vent'] is defined and mobs['Vent'] is not empty %}
+                <div class="col-12">
+                    <h2>Mob Vent</h2>
+                </div>
+                {% for mob in mobs['Vent'] %}
+                    <div class="col-1">
+                        <div class="container">
+                            {% if vich_uploader_asset(mob, 'imageFile') is null %}
+                                <img class="card-img-top" src="/images/monstres/monster.png" alt>
+                            {% else %}
+                                <img class="card-img-top" src="{{ vich_uploader_asset(mob, 'imageFile') }}" alt="Card image cap">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="container mobfeu">
+        <div class="row">
+            {% if mobs['Light'] is defined and mobs['Light'] is not empty %}
+                <div class="col-12">
+                    <h2>Mob Light</h2>
+                </div>
+                {% for mob in mobs['Light'] %}
+                    <div class="col-1">
+                        <div class="container">
+                            {% if vich_uploader_asset(mob, 'imageFile') is null %}
+                                <img class="card-img-top" src="/images/monstres/monster.png" alt>
+                            {% else %}
+                                <img class="card-img-top" src="{{ vich_uploader_asset(mob, 'imageFile') }}" alt="Card image cap">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="container mobfeu">
+        <div class="row">
+            {% if mobs['Dark'] is defined and mobs['Dark'] is not empty %}
+                <div class="col-12">
+                    <h2>Mob Dark</h2>
+                </div>
+                {% for mob in mobs['Dark'] %}
+                    <div class="col-1">
+                        <div class="container">
+                            {% if vich_uploader_asset(mob, 'imageFile') is null %}
+                                <img class="card-img-top" src="/images/monstres/monster.png" alt>
+                            {% else %}
+                                <img class="card-img-top" src="{{ vich_uploader_asset(mob, 'imageFile') }}" alt="Card image cap">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- The sidebar -->
+
+
 {% endblock %}

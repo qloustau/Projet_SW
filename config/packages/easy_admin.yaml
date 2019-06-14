@@ -2,12 +2,50 @@ easy_admin:
     entities:
         Buffs:
             class: App\Entity\Buffs
+            image_base_path: '/images/buffs/'
+            form:
+              fields:
+                - "Name"
+                - "Description"
+                - "Value"
+                - "StatEffect"
+                - { property: "imageFile", type: "vich_image"}
+                - "buffskills"'/images/buffs/'
+            list:
+              fields:
+                - "Name"
+                - "Description"
+                - "Value"
+                - "StatEffect"
+                - { property: "Image", type: "image"}
+                - "buffskills"
         Debuffs:
             class: App\Entity\Debuffs
+            image_base_path: '/images/debuffs/'
+            form:
+              fields:
+                - "Name"
+                - "Description"
+                - "Value"
+                - "StatEffect"
+                - { property: "imageFile", type: "vich_image"}
+                - "debuffskills"
+            list:
+              fields:
+                - "Name"
+                - "Description"
+                - "Value"
+                - "StatEffect"
+                - { property: "Image", type: "image"}
+                - "debuffskills"
         OtherEffect:
             class: App\Entity\OtherEffect
+            form:
+              fields:
+                - { property: "imageFile", type: "vich_image"}
         Skill:
             class: App\Entity\Skill
+            image_base_path: '/images/skills/'
             list:
               fields:
                 - "id"
@@ -22,7 +60,7 @@ easy_admin:
                 - "State"
                 - "LeaderSkill"
                 - "mobs"
-                - "Image"
+                - { property: "Image", type: "image"}
             form:
               fields:
                 - "Name"
@@ -37,13 +75,15 @@ easy_admin:
                 - "State"
                 - "LeaderSkill"
                 - "mobs"
-                - { property: "Image", type: "file"}
+                - { property: "imageFile", type: "vich_image"}
         Mob:
           class: App\Entity\Mob
+          image_base_path : '/images/monstres/'
           form:
             fields:
               - "IDinGame"
               - "Name"
+              - { property: "imageFile", type: "vich_image"}
               - "GradeNat"
               - "Family"
               - "Class"
@@ -54,8 +94,36 @@ easy_admin:
               - "Stats"
               - "Devilmon"
               - "Awake"
+
+          list:
+            fields:
+              - "Name"
+              - { property: "Image", type: "image"}
+              - "GradeNat"
+              - "Family"
+              - "Class"
+              - "Attribute"
         Attribute:
           class: App\Entity\Attribute
+          image_base_path : '/images/attributes/'
+          form:
+            fields:
+              - "Name"
+              - { property: "imageFile", type: "vich_image"}
+              - "disadvattribute"
+              - "Advantage"
+              - "advattribute"
+              - "Disadvantage"
+              - "mob"
+          list:
+            fields:
+              - "Name"
+              - { property: "Image", type: "image"}
+              - "disadvattribute"
+              - "Advantage"
+              - "advattribute"
+              - "Disadvantage"
+              - "mob"
         Stats:
           class: App\Entity\Stats
     list:

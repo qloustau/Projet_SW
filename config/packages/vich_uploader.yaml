@@ -1,0 +1,28 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        monstres_image:
+            uri_prefix: /images/monstres
+            upload_destination: '%kernel.project_dir%/public/images/monstres'
+
+        skills_image:
+            uri_prefix: /images/skills
+            upload_destination: '%kernel.project_dir%/public/images/skills'
+
+        debuffs_image:
+            uri_prefix: /images/debuffs
+            upload_destination: '%kernel.project_dir%/public/images/debuffs'
+
+        buffs_image:
+            uri_prefix: /images/buffs
+            upload_destination: '%kernel.project_dir%/public/images/buffs'
+
+        attributes_image:
+            uri_prefix: /images/attributes
+            upload_destination: '%kernel.project_dir%/public/images/attributes'
+
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'
